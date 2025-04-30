@@ -25,7 +25,10 @@ app.use(express.json());
 let db;
 
 async function connectToDB() {
-  const uri = "mongodb://127.0.0.1:27017"; // mongodb://localhost:27017/
+  // const uri = "mongodb://127.0.0.1:27017"; // mongodb://localhost:27017/
+  const uri = process.env.MONGODB_USERNAME
+    ? `mongodb+srv://${process.env.MONDGODB_USERNAME}:${process.env.MONDGODB_PASSWORD}@cluster0.zplzm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+    : "mongodb://127.0.0.1:27017";
 
   const client = new MongoClient(uri, {
     serverApi: {
